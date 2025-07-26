@@ -12,15 +12,15 @@ public class BaseTest {
 
     @BeforeMethod
     public void setUpSuite() {
+        WebDriverManager.chromedriver().setup();
+
         ChromeOptions options = new ChromeOptions();
-        if (System.getProperty("CI") != null) {
-            options.addArguments("--headless");
+        if (System.getenv("GITHUB_ACTIONS") != null) {
+            options.addArguments("--headless=new");
             options.addArguments("--no-sandbox");
             options.addArguments("--disable-dev-shm-usage");
-            options.addArguments("--disable-gpu");
         }
 
-        WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
     }
