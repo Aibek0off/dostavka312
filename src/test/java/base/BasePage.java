@@ -19,8 +19,9 @@ public abstract class BasePage {
     }
 
     public void scrollAndClick(By locator) {
-        element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
+        wait.until(ExpectedConditions.elementToBeClickable(element));
         element.click();
     }
 
