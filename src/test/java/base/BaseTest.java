@@ -21,7 +21,7 @@ public class BaseTest {
             options.addArguments("--disable-dev-shm-usage");
         }
 
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(options);
         driver.manage().window().maximize();
     }
 
