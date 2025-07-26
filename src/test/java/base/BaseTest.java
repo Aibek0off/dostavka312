@@ -20,6 +20,7 @@ public class BaseTest {
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--disable-gpu");
         options.addArguments("--remote-allow-origins=*");
+        options.addArguments("--user-data-dir=/tmp/chrome-profile");
 
         driver = new ChromeDriver();
         driver.manage().window().maximize();
