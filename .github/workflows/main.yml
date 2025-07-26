@@ -1,46 +1,41 @@
-name: Run UI Tests
+name: Run Tests with Allure
 
 on:
   push:
-    branches:
-      - master
+    branches: [ master ]
   pull_request:
+    branches: [ master ]
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up JDK 17
+      - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
           distribution: 'temurin'
+          java-version: '17'
 
-      - name: Install Google Chrome
-        run: |
-          sudo apt update
-          sudo apt install -y google-chrome-stable
+      - name: Set up Chrome
+        uses: browser-actions/setup-chrome@v1
 
-      - name: Check Chrome version
-        run: google-chrome --version
+      - name: Cache Maven packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-m2
 
-      - name: Build and run tests with Maven
+      - name: Run Tests
         run: mvn clean test
 
-      - name: Install Allure CLI
-        run: |
-          npm install -g allure-commandline --save-dev
-
-      - name: Generate Allure Report
-        run: |
-          allure generate target/allure-results --clean -o target/allure-report
-
-      - name: Upload Allure Report
-        uses: actions/upload-artifact@v4
+      - name: Upload Allure results
+        uses: actions/upload-artifact@v3
         with:
-          name: allure-report
-          path: target/allure-report
+          name: allure-results
+          path: target/allure-results
