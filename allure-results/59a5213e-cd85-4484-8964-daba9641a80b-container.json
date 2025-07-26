@@ -1,0 +1,1 @@
+{"uuid":"59a5213e-cd85-4484-8964-daba9641a80b","name":"tests.EdaTest.openEdaPage","children":["dcf4779a-7ba6-4f8d-ba1c-f89b9d27d30c"],"description":"","befores":[{"name":"openEdaPage","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1753512724493,"stop":1753512727568}],"afters":[],"start":1753512724493,"stop":1753512727568}
