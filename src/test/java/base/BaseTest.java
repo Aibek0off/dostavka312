@@ -18,8 +18,6 @@ public class BaseTest {
             options.addArguments("--no-sandbox");
             options.addArguments("--disable-dev-shm-usage");
             options.addArguments("--disable-gpu");
-            options.addArguments("--remote-allow-origins=*");
-            options.addArguments("--user-data-dir=/tmp/chrome-profile");
         }
 
         WebDriverManager.chromedriver().setup();
