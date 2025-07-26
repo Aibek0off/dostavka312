@@ -22,7 +22,7 @@ public abstract class BasePage {
         element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
         wait.until(ExpectedConditions.elementToBeClickable(element));
-        element.click();
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
     }
 
     public String getURL(String expectedUrl) {
