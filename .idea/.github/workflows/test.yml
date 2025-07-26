@@ -2,22 +2,21 @@ name: Run Tests
 
 on:
   push:
-    branches: [master]
-  pull_request:
-    branches: [master]
+    branches: [ master ]
 
 jobs:
-  test: 
+  test:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Set up JDK
-      uses: actions/setup-java@v3
-      with:
-        distribution: 'temurin'
-        java-version: 17
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
 
-    - name: Build and Test with Maven
-      run: mvn clean test
+      - name: Build and run tests with Maven
+        run: mvn clean test
