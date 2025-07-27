@@ -2,48 +2,52 @@ name: Run Tests and Publish Allure Report
 
 on:
   push:
-    branches: [ "master" ]
-
-permissions:
-  contents: write
-  pages: write
-  id-token: write
+    branches: [ main ]
+  pull_request:
 
 jobs:
-  build:
+  test-and-deploy:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Java
+      - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
 
+      - name: Cache Maven packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
       - name: Run tests with Maven
-        run: mvn clean test -DsuiteXmlFile=testng.xml
+        run: mvn clean test "-DsuiteXmlFile=testng.xml"
 
-      - name: Install Allure and generate report
+      - name: Install Allure Commandline
+        uses: allegro-actions/setup-allurectl@v1
+
+      - name: Generate Allure report
         run: |
-          npm install -g allure-commandline --save-dev
-          allure generate target/allure-results --clean -o allure-report
+          allurectl generate \
+            --results target/allure-results \
+            --output allure-report
 
-      - name: Upload HTML report to GitHub Pages artifact
+      - name: Upload HTML to GitHub Pages
         uses: actions/upload-pages-artifact@v1
         with:
           path: allure-report
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    steps:
       - name: Deploy to GitHub Pages
-        id: deployment
         uses: actions/deploy-pages@v4
