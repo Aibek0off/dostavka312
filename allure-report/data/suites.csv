@@ -1,0 +1,6 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Sun Jul 27 09:19:15 ALMT 2025","Sun Jul 27 09:19:16 ALMT 2025","491","Surefire suite","Surefire test","tests.EdaTest","tests.EdaTest","openCentrPlovaPage","openCentrPlovaPage",""
+"passed","Sun Jul 27 09:19:20 ALMT 2025","Sun Jul 27 09:19:20 ALMT 2025","496","Surefire suite","Surefire test","tests.EdaTest","tests.EdaTest","openCrazyBrothersPage","openCrazyBrothersPage",""
+"passed","Sun Jul 27 09:19:28 ALMT 2025","Sun Jul 27 09:19:29 ALMT 2025","685","Surefire suite","Surefire test","tests.EdaTest","tests.EdaTest","openKfcPage","openKfcPage",""
+"passed","Sun Jul 27 09:19:11 ALMT 2025","Sun Jul 27 09:19:12 ALMT 2025","506","Surefire suite","Surefire test","tests.EdaTest","tests.EdaTest","openAshlyanfu1Page","openAshlyanfu1Page",""
+"passed","Sun Jul 27 09:19:24 ALMT 2025","Sun Jul 27 09:19:24 ALMT 2025","499","Surefire suite","Surefire test","tests.EdaTest","tests.EdaTest","openFaizaPage","openFaizaPage",""
